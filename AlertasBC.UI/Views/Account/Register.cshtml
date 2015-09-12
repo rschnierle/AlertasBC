@@ -1,0 +1,44 @@
+﻿@model AlertasBC.Model.User
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>Registro</h1>
+    <h2>Crear nueva cuenta.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Registro</legend>
+        <ol>
+            <li>
+                @Html.Label("Nombre")
+                @Html.TextBoxFor(m => m.NAME)
+            </li>
+             <li>
+                @Html.Label("Usuario")
+                @Html.TextBoxFor(m => m.USERNAME)
+                @Html.ValidationMessageFor(m => m.USERNAME)
+            </li>
+            <li>
+                @Html.Label("Contraseña")
+                @Html.PasswordFor(m => m.PASSWORD)
+                @Html.ValidationMessageFor(m => m.PASSWORD)
+            </li>
+            <li>
+                Seleccione la dependencia a la que pertenece:
+                @Html.DropDownList("ID_DEPENDENCY", (SelectList)ViewBag.DependencyList)
+            </li>
+            
+        </ol>
+        <input type="submit" value="Registrar" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

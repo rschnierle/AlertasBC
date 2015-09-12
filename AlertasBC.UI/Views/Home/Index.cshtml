@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (TempData["Message"] != null)
+{
+    <text>
+   <script type="text/javascript">
+       alert('@TempData["Message"] ');
+   </script>
+   </text>
+}
+<style type="text/css">
+    .text-area {
+        width:85%
+    }
+
+</style>
+
+@model AlertasBC.Model.Notification
+@using (Html.BeginForm())
+{
+<h2>Bienvenido</h2><h3>¿Algo que notificar a la población?</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Ingrese la notificación:</h5>
+        
+        
+        @Html.TextAreaFor(m => m.NOTIFICATION_TEXT, new { @required = "required", @class = "text-area" })
+          
+    </li>
+
+    <li class="two">
+        <h5>Seleccione las cuidades:</h5>
+     @*   <div style="padding-top:5px"></div>*@
+        <ul>
+             @foreach (var c in ViewBag.CitiesList)
+             {
+                <li style="list-style-type: none;">
+                    <input type="checkbox" 
+                    name="SelectedCities" value="@c.ID" id="@c.ID"/>@c.NAME
+                </li>
+             }
+            </ul>
+    </li>
+
+    <li class="three">
+        <h5>Enviar</h5>
+      <input type="submit" value="Enviar Notificación" />
+    </li>
+</ol>
+}
